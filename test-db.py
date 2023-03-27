@@ -29,8 +29,8 @@ def main():
     # insert a new products
     logging.info('Inserting data...')
     for product in products:
-        if product[1] < 40000.00:
-            cur.execute(f"INSERT INTO products (name, price) VALUES ('{product[0]}', '{product[1]}')")
+        # if product[1] < 40000.00:
+        cur.execute(f"INSERT INTO products (name, price) VALUES ('{product[0]}', '{product[1]}')")
 
     conn.commit()
 
