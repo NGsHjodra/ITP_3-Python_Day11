@@ -13,11 +13,11 @@ jobs:
       - name: Create SSH key
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_rsa
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          ssh-keyscan -H "${{ vars.DEPLOY_SERVER_IP }}" > ~/.ssh/known_hosts
+          echo "${{ secrets.AWS_LIGHTSAIL }}" > ~/.ssh/id_rsa
+          ssh-keyscan -H "${{ vars.IP }}" > ~/.ssh/known_hosts
       - name: Deploy with git pull and running update.sh on the instance
         run: |
-          echo "Deploying to ${{ vars.DEPLOY_SERVER_IP }} ..."
+          echo "Deploying to ${{ vars.IP }} ..."
           ssh -i ~/.ssh/id_rsa ubuntu@"${{ vars.IP }}" "cd ITP_3-Python_Day11 && git checkout -- . && git pull && chmod u+x update.sh && ./update.sh"
 #          ssh -i ~/.ssh/id_rsa ubuntu@"${{ vars.DEPLOY_SERVER_IP }}" "gunicorn -b 0.0.0.0:8888 mini-server:app --daemon --log-file ./logs/webserver.log"
 
